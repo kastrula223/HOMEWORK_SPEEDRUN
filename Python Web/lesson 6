@@ -1,0 +1,18 @@
+Завдання 1
+
+CREATE TABLE restaurants (
+    id SERIAL PRIMARY KEY,
+    address VARCHAR(255) NOT NULL,
+    michelin_stars INT DEFAULT 0,
+    rating NUMERIC(3, 2),
+    cuisine_type VARCHAR(100) NOT NULL
+);
+
+INSERT INTO restaurants (address, michelin_stars, rating, cuisine_type)
+VALUES
+    ('вул. Хрещатик, 15, Київ', 0, 4.8, 'Українська'),
+    ('Via Dante 12, Мілан', 2, 4.9, 'Італійська'),
+    ('3 Chome-2-1 Ginza, Токіо', 3, 5.0, 'Азіатська');
+
+Завдання 2
+Повірте мені на слово я зі всім ознайомився
