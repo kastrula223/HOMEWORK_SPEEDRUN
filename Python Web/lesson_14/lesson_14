@@ -1,0 +1,114 @@
+1. SQLite
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    event_date TEXT NOT NULL
+);
+
+CREATE TABLE tickets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    event_id INTEGER,
+    price REAL NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (event_id) REFERENCES events(id)
+);
+
+INSERT INTO users (name, email) VALUES
+('Олена Коваль', 'olena@example.com'),
+('Іван Петренко', 'ivan@example.com'),
+('Марія Бойко', 'maria@example.com'),
+('Андрій Сидоренко', 'andriy@example.com');
+
+INSERT INTO events (title, event_date) VALUES
+('Концерт Океан Ельзи', '2026-08-15'),
+('IT-Конференція', '2026-09-10'),
+('Театральна вистава', '2026-10-01');
+
+INSERT INTO tickets (user_id, event_id, price) VALUES
+(1, 1, 650.00),
+(2, 1, 650.00),
+(3, 1, 650.00),
+(4, 1, 650.00),
+(1, 1, 650.00),
+(2, 1, 650.00),
+(3, 2, 450.00),
+(4, 3, 800.00);
+
+2. PostgreSQL
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    event_date DATE NOT NULL
+);
+
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    event_id INT REFERENCES events(id) ON DELETE CASCADE,
+    price NUMERIC(10, 2) NOT NULL
+);
+
+INSERT INTO users (name, email) VALUES
+('Олена Коваль', 'olena@example.com'),
+('Іван Петренко', 'ivan@example.com'),
+('Марія Бойко', 'maria@example.com'),
+('Андрій Сидоренко', 'andriy@example.com');
+
+INSERT INTO events (title, event_date) VALUES
+('Концерт Океан Ельзи', '2026-08-15'),
+('IT-Конференція', '2026-09-10'),
+('Театральна вистава', '2026-10-01');
+
+INSERT INTO tickets (user_id, event_id, price) VALUES
+(1, 1, 650.00),
+(2, 1, 650.00),
+(3, 1, 650.00),
+(4, 1, 650.00),
+(1, 1, 650.00),
+(2, 1, 650.00),
+(3, 2, 450.00),
+(4, 3, 800.00);
+
+
+3. Запити
+
+SELECT
+    tickets.id AS ticket_id,
+    users.name AS user_name,
+    events.title AS event_title,
+    tickets.price
+FROM tickets
+JOIN users ON tickets.user_id = users.id
+JOIN events ON tickets.event_id = events.id;
+
+SELECT
+    events.id,
+    events.title,
+    COUNT(tickets.id) AS tickets_sold
+FROM events
+JOIN tickets ON events.id = tickets.event_id
+GROUP BY events.id, events.title
+HAVING COUNT(tickets.id) > 5;
+
+SELECT DISTINCT
+    users.id,
+    users.name,
+    users.email
+FROM users
+JOIN tickets ON users.id = tickets.user_id
+WHERE tickets.price > 500;
