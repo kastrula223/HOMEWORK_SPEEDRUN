@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 1</title>
+</head>
+<body>
+
+    <input type="number" id="numberInput" placeholder="Введіть число">
+    <button onclick="calculate()">Обчислити</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            let num = Number(document.getElementById("numberInput").value);
+
+            let square = num ** 2;
+            let cube = num ** 3;
+            let remainder = num % 5;
+
+            document.getElementById("result").innerHTML =
+                `Квадрат: ${square}<br>` +
+                `Куб: ${cube}<br>` +
+                `Залишок від ділення на 5: ${remainder}`;
+        }
+    </script>
+
+</body>
+</html>

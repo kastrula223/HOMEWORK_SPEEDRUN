@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 3</title>
+    <style>
+        body {
+            transition: background-color 0.3s ease;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="changeColor()">Змінити колір фону</button>
+
+    <script>
+        const colors = ["red", "blue", "green", "yellow", "purple"];
+        let currentIndex = 0;
+
+        function changeColor() {
+            document.body.style.backgroundColor = colors[currentIndex];
+            currentIndex = (currentIndex + 1) % colors.length;
+        }
+    </script>
+
+</body>
+</html>
