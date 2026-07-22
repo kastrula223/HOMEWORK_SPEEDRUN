@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+    <h1>CSRF Demo</h1>
+    <p>Зареєстровані користувачі: {{ users.keys() | list }}</p>
+    <h3>Повідомлення:</h3>
+    <ul>
+        {% for m in messages %}
+            <li><strong>{{ m.author }}:</strong> {{ m.text }}</li>
+        {% else %}
+            <li>Ще немає повідомлень.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}CSRF Demo{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        nav {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 14px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 20px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .flash {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .flash.success {
+            background: #e6f4ea;
+            border: 1px solid #b7e1c1;
+            color: #1e7e34;
+        }
+        .flash.error {
+            background: #fdecea;
+            border: 1px solid #f5c6cb;
+            color: #b00020;
+        }
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Головна</a>
+        <a href="{{ url_for('register') }}">Реєстрація</a>
+        <a href="{{ url_for('login') }}">Вхід</a>
+        <a href="{{ url_for('message') }}">Повідомлення</a>
+    </nav>
+
+    {% with flashed = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in flashed %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
