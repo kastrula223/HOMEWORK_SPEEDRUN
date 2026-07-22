@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .qr-result {
+            margin-top: 30px;
+        }
+        .qr-result img {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Генератор QR-кодів</h1>
+    <form method="POST">
+        <input type="text" name="text" placeholder="Введіть текст" value="{{ text }}" required>
+        <button type="submit">Згенерувати</button>
+    </form>
+
+    {% if qr_url %}
+    <div class="qr-result">
+        <h3>Ваш QR-код:</h3>
+        <img src="{{ qr_url }}" alt="QR Code">
+        <p>Закодований текст: <strong>{{ text }}</strong></p>
+    </div>
+    {% endif %}
+</body>
+</html>
