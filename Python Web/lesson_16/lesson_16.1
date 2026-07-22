@@ -1,0 +1,38 @@
+CREATE DATABASE pizzeria_db;
+
+USE DATABASE pizzeria_db;
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    order_date DATE NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE menu (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE order_items (
+    order_id INT REFERENCES orders(id) ON DELETE CASCADE,
+    menu_id INT REFERENCES menu(id) ON DELETE CASCADE,
+    quantity INT NOT NULL,
+    PRIMARY KEY (order_id, menu_id)
+);
+
+SELECT COUNT(id) AS total_orders_last_month
+FROM orders
+WHERE order_date >= CURRENT_DATE - INTERVAL '1 month';
+
+SELECT m.name AS popular_dish,
+SUM(oi.quantity) AS total_quantity_sold
+FROM order_items oi
+JOIN menu m ON oi.menu_id = m.id
+GROUP BY m.id, m.name
+ORDER BY total_quantity_sold DESC
+LIMIT 1;
+
+SELECT AVG(total_price) AS average_order_value
+FROM orders
+WHERE order_date >= CURRENT_DATE - INTERVAL '3 months';
