@@ -1,0 +1,20 @@
+[
+  {"model": "library.author", "pk": 1, "fields": {"name": "Тарас Шевченко", "country": "Україна", "birth_year": 1814}},
+  {"model": "library.author", "pk": 2, "fields": {"name": "George Orwell", "country": "Велика Британія", "birth_year": 1903}},
+  {"model": "library.author", "pk": 3, "fields": {"name": "Haruki Murakami", "country": "Японія", "birth_year": 1949}},
+
+  {"model": "library.book", "pk": 1, "fields": {"title": "Кобзар", "author": 1, "isbn": "9789660352267", "pages": 328, "publication_year": 1840, "is_available": true}},
+  {"model": "library.book", "pk": 2, "fields": {"title": "1984", "author": 2, "isbn": "9780451524935", "pages": 328, "publication_year": 1949, "is_available": false}},
+  {"model": "library.book", "pk": 3, "fields": {"title": "Animal Farm", "author": 2, "isbn": "9780451526342", "pages": 112, "publication_year": 1945, "is_available": true}},
+  {"model": "library.book", "pk": 4, "fields": {"title": "Norwegian Wood", "author": 3, "isbn": "9780375704024", "pages": 296, "publication_year": 1987, "is_available": false}},
+  {"model": "library.book", "pk": 5, "fields": {"title": "Kafka on the Shore", "author": 3, "isbn": "9781400079278", "pages": 505, "publication_year": 2002, "is_available": true}},
+
+  {"model": "library.reader", "pk": 1, "fields": {"name": "Олена Коваленко", "email": "olena.k@example.com"}},
+  {"model": "library.reader", "pk": 2, "fields": {"name": "Іван Петренко", "email": "ivan.p@example.com"}},
+  {"model": "library.reader", "pk": 3, "fields": {"name": "Марія Бондар", "email": "maria.b@example.com"}},
+
+  {"model": "library.loan", "pk": 1, "fields": {"reader": 1, "book": 2, "loan_date": "2026-06-01", "return_date": null}},
+  {"model": "library.loan", "pk": 2, "fields": {"reader": 2, "book": 4, "loan_date": "2026-06-10", "return_date": null}},
+  {"model": "library.loan", "pk": 3, "fields": {"reader": 3, "book": 1, "loan_date": "2026-05-15", "return_date": "2026-06-01"}},
+  {"model": "library.loan", "pk": 4, "fields": {"reader": 1, "book": 5, "loan_date": "2026-06-20", "return_date": null}}
+]
